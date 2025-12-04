@@ -1,6 +1,5 @@
 # OSV Watch
 
-**Version:** 0.1.0
 
 A modern web application for tracking and monitoring open source vulnerabilities (CVE, GHSA, and more) built with Next.js 16. Stay informed about security vulnerabilities affecting your dependencies and open source projects.
 
@@ -70,12 +69,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/) 16.0.7
-- **React**: 19.2.1
+- **Framework**: [Next.js](https://nextjs.org/) 16
+- **React**: 19.2
 - **React Compiler**: 1.0
 - **Language**: TypeScript 5+
 - **Styling**: Tailwind CSS 4
-- **Linting & Formatting**: Biome 2.2.0
+- **Linting & Formatting**: Biome
 - **Package Manager**: npm
 
 
