@@ -105,7 +105,7 @@ const VulnerabilitiesForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:via-gray-400 disabled:to-gray-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer hover:scale-105 disabled:hover:scale-100"
+            className="w-full md:w-auto px-8 py-3 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:via-gray-400 disabled:to-gray-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer hover:scale-105 disabled:hover:scale-100"
           >
             {isLoading ? "Checking..." : "Check Vulnerabilities"}
           </button>
