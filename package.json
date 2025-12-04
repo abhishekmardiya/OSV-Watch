@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "ts": "tsc --noEmit --watch",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
