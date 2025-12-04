@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "OSV Watch - Security Vulnerability Scanner",
   description:
     "Check for security vulnerabilities in your packages using the OSV API",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
