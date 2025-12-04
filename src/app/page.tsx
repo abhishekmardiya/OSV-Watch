@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   HiArrowTopRightOnSquare,
   HiBolt,
@@ -6,9 +7,32 @@ import {
   HiCube,
   HiShieldCheck,
 } from "react-icons/hi2";
+import { getVulnerabilities } from "@/actions";
 import VulnerabilitiesForm from "@/components/VulnerabilitiesForm";
+import { VulnerabilitiesList } from "@/components/VulnerabilitiesList";
+import type { HomeProps, OSVVulnerability } from "@/types";
 
-export default function Home() {
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  const ecosystem = params.ecosystem || "npm";
+  const packageName = params.package || "";
+  const packageVersion = params.version || "";
+
+  const isSearchActive = Boolean(ecosystem && packageName && packageVersion);
+
+  let finalVulnerabilities: OSVVulnerability[] = [];
+  let finalError: string | null = null;
+  if (packageName && packageVersion) {
+    const { vulnerabilities, error } = await getVulnerabilities(
+      packageVersion,
+      packageName,
+      ecosystem
+    );
+
+    finalVulnerabilities = vulnerabilities;
+    finalError = error;
+  }
+
   return (
     <main className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/20 dark:from-gray-900 dark:via-blue-950/20 dark:to-purple-950/20 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
@@ -36,9 +60,24 @@ export default function Home() {
         </div>
 
         {/* Vulnerability Scanner Form */}
-        <VulnerabilitiesForm />
+        <VulnerabilitiesForm
+          initialEcosystem={ecosystem}
+          initialPackageName={packageName}
+          initialPackageVersion={packageVersion}
+        />
         <br />
         <br />
+
+        {/* Vulnerabilities Results */}
+        <Suspense>
+          {finalVulnerabilities?.length && (
+            <VulnerabilitiesList
+              vulnerabilities={finalVulnerabilities}
+              error={finalError}
+              isSearchActive={isSearchActive}
+            />
+          )}
+        </Suspense>
 
         {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

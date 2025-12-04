@@ -1,43 +1,66 @@
 "use client";
 
-import { useState } from "react";
-import { getVulnerabilities } from "@/actions";
-import type { OSVQueryResponse } from "@/types";
-import { VulnerabilitiesList } from "./VulnerabilitiesList";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
+import { HiXMark } from "react-icons/hi2";
 
-const VulnerabilitiesForm = () => {
-  const [packageName, setPackageName] = useState("");
-  const [packageVersion, setPackageVersion] = useState("");
-  const [ecosystem, setEcosystem] = useState("npm");
-  const [vulnerabilities, setVulnerabilities] =
-    useState<OSVQueryResponse["vulns"]>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface VulnerabilitiesFormProps {
+  initialEcosystem?: string;
+  initialPackageName?: string;
+  initialPackageVersion?: string;
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const VulnerabilitiesForm = ({
+  initialEcosystem = "npm",
+  initialPackageName = "",
+  initialPackageVersion = "",
+}: VulnerabilitiesFormProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+
+  const [packageName, setPackageName] = useState(initialPackageName);
+  const [packageVersion, setPackageVersion] = useState(initialPackageVersion);
+  const [ecosystem, setEcosystem] = useState(initialEcosystem);
+
+  useEffect(() => {
+    const ecosystemParam = searchParams.get("ecosystem");
+    const packageParam = searchParams.get("package");
+    const versionParam = searchParams.get("version");
+
+    if (ecosystemParam) setEcosystem(ecosystemParam);
+    if (packageParam) setPackageName(packageParam);
+    if (versionParam) setPackageVersion(versionParam);
+  }, [searchParams]);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    const { code, vulnerabilities, error } = await getVulnerabilities(
-      packageVersion,
-      packageName,
-      ecosystem
-    );
+    const params = new URLSearchParams();
+    if (ecosystem) params.set("ecosystem", ecosystem);
+    if (packageName) params.set("package", packageName);
+    if (packageVersion) params.set("version", packageVersion);
 
-    try {
-      if (!code) {
-        throw new Error(error!);
-      }
-
-      setVulnerabilities(vulnerabilities);
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to fetch vulnerabilities"
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    startTransition(() => {
+      router.push(`/?${params.toString()}`);
+    });
   };
+
+  const handleReset = () => {
+    setEcosystem("npm");
+    setPackageName("");
+    setPackageVersion("");
+
+    startTransition(() => {
+      router.push("/");
+    });
+  };
+
+  const hasSearchParams = Boolean(
+    searchParams.get("ecosystem") ||
+      searchParams.get("package") ||
+      searchParams.get("version")
+  );
 
   return (
     <section>
@@ -102,23 +125,28 @@ const VulnerabilitiesForm = () => {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full md:w-auto px-8 py-3 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:via-gray-400 disabled:to-gray-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer hover:scale-105 disabled:hover:scale-100"
-          >
-            {isLoading ? "Checking..." : "Check Vulnerabilities"}
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              type="submit"
+              disabled={isPending}
+              className="flex-1 md:flex-none px-8 py-3 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:via-gray-400 disabled:to-gray-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer hover:scale-105 disabled:hover:scale-100"
+            >
+              {isPending ? "Checking..." : "Check Vulnerabilities"}
+            </button>
+            {hasSearchParams && (
+              <button
+                type="button"
+                onClick={handleReset}
+                disabled={isPending}
+                className="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:bg-gray-100 dark:disabled:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 cursor-pointer hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2"
+              >
+                <HiXMark className="w-5 h-5" />
+                Reset
+              </button>
+            )}
+          </div>
         </form>
       </div>
-
-      {vulnerabilities?.length && (
-        <VulnerabilitiesList
-          vulnerabilities={vulnerabilities}
-          isLoading={isLoading}
-          error={error}
-        />
-      )}
     </section>
   );
 };

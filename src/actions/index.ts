@@ -1,5 +1,3 @@
-"use server";
-
 import type { OSVQueryPayload, OSVQueryResponse } from "@/types";
 
 export const getVulnerabilities = async (

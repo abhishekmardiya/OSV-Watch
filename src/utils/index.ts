@@ -24,7 +24,7 @@ export const getSeverityColorFromString = (severity?: string) => {
 export const getSeverityColor = (
   severity?: { type?: string; score?: string }[]
 ) => {
-  if (!severity || severity.length === 0) return "bg-gray-500";
+  if (!severity || !severity?.length) return "bg-gray-500";
 
   const firstSeverity = severity[0];
   const score = firstSeverity?.score;
@@ -53,7 +53,7 @@ export const getSeverityLabel = (
     return databaseSeverity.charAt(0).toUpperCase() + databaseSeverity.slice(1);
   }
 
-  if (!severity || severity.length === 0) return "Unknown";
+  if (!severity || !severity?.length) return "Unknown";
 
   const firstSeverity = severity[0];
   if (firstSeverity?.score) {
@@ -82,7 +82,7 @@ export const formatVersionRange = (range?: {
     last_affected?: string;
   }>;
 }) => {
-  if (!range?.events || range.events.length === 0) return "N/A";
+  if (!range?.events || !range?.events?.length) return "N/A";
 
   const events = range.events;
   const introduced = events.find((e) => e.introduced)?.introduced;
