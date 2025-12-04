@@ -32,7 +32,7 @@ export const getVulnerabilities = async (
     return {
       code: 1,
       vulnerabilities: finalData || [],
-      error: finalData?.length
+      message: finalData?.length
         ? null
         : "No vulnerabilities found for the given inputs.",
     };
@@ -40,7 +40,7 @@ export const getVulnerabilities = async (
     return {
       code: 0,
       vulnerabilities: [],
-      error:
+      message:
         err instanceof Error ? err.message : "Failed to fetch vulnerabilities",
     };
   }

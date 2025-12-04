@@ -9,20 +9,22 @@ export const VulnerabilitiesList = async ({
   const { ecosystem, packageName, packageVersion } = await formInputs;
   const isSearchActive = Boolean(ecosystem && packageName && packageVersion);
 
+  let finalCode: number = 0;
   let finalVulnerabilities: OSVVulnerability[] = [];
-  let finalError: string | null = null;
+  let finalMessage: string | null = null;
   if (packageName && packageVersion) {
-    const { vulnerabilities, error } = await getVulnerabilities(
+    const { code, vulnerabilities, message } = await getVulnerabilities(
       packageVersion,
       packageName,
       ecosystem
     );
 
+    finalCode = code;
     finalVulnerabilities = vulnerabilities;
-    finalError = error;
+    finalMessage = message;
   }
 
-  if (finalError) {
+  if (isSearchActive && !finalCode) {
     return (
       <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
         <HiExclamationCircle
@@ -30,7 +32,7 @@ export const VulnerabilitiesList = async ({
           aria-label="Error"
         />
         <p className="text-red-800 dark:text-red-200 font-medium">
-          {finalError}
+          {finalMessage}
         </p>
       </div>
     );
@@ -58,25 +60,29 @@ export const VulnerabilitiesList = async ({
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Vulnerabilities Found
-        </h2>
-        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
-          {finalVulnerabilities.length}{" "}
-          {finalVulnerabilities.length === 1
-            ? "vulnerability"
-            : "finalVulnerabilities"}
-        </span>
-      </div>
-      <div className="space-y-4">
-        {finalVulnerabilities.map((vuln, idx) => (
-          <VulnerabilityCard key={vuln.id || idx} vulnerability={vuln} />
-        ))}
-      </div>
-      <br />
-      <br />
-    </div>
+    <>
+      {isSearchActive && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Vulnerabilities Found
+            </h2>
+            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
+              {finalVulnerabilities.length}{" "}
+              {finalVulnerabilities.length === 1
+                ? "vulnerability"
+                : "finalVulnerabilities"}
+            </span>
+          </div>
+          <div className="space-y-4">
+            {finalVulnerabilities.map((vuln, idx) => (
+              <VulnerabilityCard key={vuln.id || idx} vulnerability={vuln} />
+            ))}
+          </div>
+          <br />
+          <br />
+        </div>
+      )}
+    </>
   );
 };
