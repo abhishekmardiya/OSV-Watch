@@ -13,7 +13,7 @@ import type { HomeProps } from "@/types";
 
 export default async function Home({ searchParams }: HomeProps) {
   const formInputs = searchParams.then((sp) => ({
-    ecosystem: sp.ecosystem || "npm",
+    ecosystem: sp.ecosystem || "",
     packageName: sp.package || "",
     packageVersion: sp.version || "",
   }));

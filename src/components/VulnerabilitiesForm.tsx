@@ -9,9 +9,9 @@ const VulnerabilitiesForm = () => {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  const initialPackageName = searchParams.get("package") || "";
-  const initialPackageVersion = searchParams.get("version") || "";
   const initialEcosystem = searchParams.get("ecosystem") || "npm";
+  const initialPackageName = searchParams.get("package") || "next";
+  const initialPackageVersion = searchParams.get("version") || "16.0.6";
 
   const [packageName, setPackageName] = useState(initialPackageName);
   const [packageVersion, setPackageVersion] = useState(initialPackageVersion);
