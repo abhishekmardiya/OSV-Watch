@@ -1,3 +1,26 @@
+export const getSeverityFromDatabaseSpecific = (
+  databaseSpecific?: Record<string, unknown>
+): string | undefined => {
+  if (!databaseSpecific) return undefined;
+  const severity = databaseSpecific.severity;
+  if (typeof severity === "string") {
+    return severity;
+  }
+  return undefined;
+};
+
+export const getSeverityColorFromString = (severity?: string) => {
+  if (!severity) return "bg-gray-500";
+
+  const severityLower = severity.toLowerCase();
+  if (severityLower === "critical") return "bg-red-600";
+  if (severityLower === "high") return "bg-orange-600";
+  if (severityLower === "medium") return "bg-yellow-500";
+  if (severityLower === "low") return "bg-blue-500";
+
+  return "bg-gray-500";
+};
+
 export const getSeverityColor = (
   severity?: { type?: string; score?: string }[]
 ) => {
@@ -23,8 +46,13 @@ export const getSeverityColor = (
 };
 
 export const getSeverityLabel = (
-  severity?: { type?: string; score?: string }[]
+  severity?: { type?: string; score?: string }[],
+  databaseSeverity?: string
 ) => {
+  if (databaseSeverity) {
+    return databaseSeverity.charAt(0).toUpperCase() + databaseSeverity.slice(1);
+  }
+
   if (!severity || severity.length === 0) return "Unknown";
 
   const firstSeverity = severity[0];
