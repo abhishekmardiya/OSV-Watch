@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "ts": "tsc --noEmit --watch",
-    "build": "next build",
-    "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "next": "^16.0.7",

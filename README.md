@@ -113,5 +113,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [OSV Database](https://osv.dev/)
 - [CVE Database](https://cve.mitre.org/)
 - [GitHub Security Advisories](https://github.com/advisories)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Documentation](https://react.dev/)
