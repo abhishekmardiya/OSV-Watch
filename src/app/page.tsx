@@ -7,31 +7,16 @@ import {
   HiCube,
   HiShieldCheck,
 } from "react-icons/hi2";
-import { getVulnerabilities } from "@/actions";
 import VulnerabilitiesForm from "@/components/VulnerabilitiesForm";
 import { VulnerabilitiesList } from "@/components/VulnerabilitiesList";
-import type { HomeProps, OSVVulnerability } from "@/types";
+import type { HomeProps } from "@/types";
 
 export default async function Home({ searchParams }: HomeProps) {
-  const params = await searchParams;
-  const ecosystem = params.ecosystem || "npm";
-  const packageName = params.package || "";
-  const packageVersion = params.version || "";
-
-  const isSearchActive = Boolean(ecosystem && packageName && packageVersion);
-
-  let finalVulnerabilities: OSVVulnerability[] = [];
-  let finalError: string | null = null;
-  if (packageName && packageVersion) {
-    const { vulnerabilities, error } = await getVulnerabilities(
-      packageVersion,
-      packageName,
-      ecosystem
-    );
-
-    finalVulnerabilities = vulnerabilities;
-    finalError = error;
-  }
+  const formInputs = searchParams.then((sp) => ({
+    ecosystem: sp.ecosystem || "npm",
+    packageName: sp.package || "",
+    packageVersion: sp.version || "",
+  }));
 
   return (
     <main className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/20 dark:from-gray-900 dark:via-blue-950/20 dark:to-purple-950/20 py-8 px-4 sm:px-6 lg:px-8">
@@ -41,7 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <div className="inline-block mb-6">
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-2xl opacity-30 animate-pulse" />
-              <h1 className="relative text-6xl font-extrabold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+              <h1 className="relative text-6xl font-extrabold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 mt-8">
                 OSV Watch
               </h1>
             </div>
@@ -60,23 +45,15 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
 
         {/* Vulnerability Scanner Form */}
-        <VulnerabilitiesForm
-          initialEcosystem={ecosystem}
-          initialPackageName={packageName}
-          initialPackageVersion={packageVersion}
-        />
+        <Suspense>
+          <VulnerabilitiesForm />
+        </Suspense>
         <br />
         <br />
 
         {/* Vulnerabilities Results */}
         <Suspense>
-          {finalVulnerabilities?.length && (
-            <VulnerabilitiesList
-              vulnerabilities={finalVulnerabilities}
-              error={finalError}
-              isSearchActive={isSearchActive}
-            />
-          )}
+          <VulnerabilitiesList formInputs={formInputs} />
         </Suspense>
 
         {/* Features Section */}

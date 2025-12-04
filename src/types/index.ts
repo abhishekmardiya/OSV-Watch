@@ -66,9 +66,11 @@ export interface VulnerabilityCardProps {
 }
 
 export interface VulnerabilitiesListProps {
-  vulnerabilities: OSVVulnerability[];
-  error: string | null;
-  isSearchActive: boolean;
+  formInputs: Promise<{
+    ecosystem: string;
+    packageName: string;
+    packageVersion: string;
+  }>;
 }
 
 export interface HomeProps {

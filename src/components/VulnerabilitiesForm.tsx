@@ -4,20 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { HiXMark } from "react-icons/hi2";
 
-interface VulnerabilitiesFormProps {
-  initialEcosystem?: string;
-  initialPackageName?: string;
-  initialPackageVersion?: string;
-}
-
-const VulnerabilitiesForm = ({
-  initialEcosystem = "npm",
-  initialPackageName = "",
-  initialPackageVersion = "",
-}: VulnerabilitiesFormProps) => {
+const VulnerabilitiesForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+
+  const initialPackageName = searchParams.get("package") || "";
+  const initialPackageVersion = searchParams.get("version") || "";
+  const initialEcosystem = searchParams.get("ecosystem") || "npm";
 
   const [packageName, setPackageName] = useState(initialPackageName);
   const [packageVersion, setPackageVersion] = useState(initialPackageVersion);
