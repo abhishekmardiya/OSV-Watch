@@ -111,7 +111,8 @@ const VulnerabilitiesForm = () => {
           </button>
         </form>
       </div>
-      {vulnerabilities !== undefined && (
+
+      {vulnerabilities?.length && (
         <VulnerabilitiesList
           vulnerabilities={vulnerabilities}
           isLoading={isLoading}
