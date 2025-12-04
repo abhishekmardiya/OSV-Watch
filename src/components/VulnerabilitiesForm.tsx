@@ -55,7 +55,7 @@ const VulnerabilitiesForm = () => {
                 id="ecosystem"
                 value={ecosystem}
                 onChange={(e) => setEcosystem(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="npm">npm</option>
                 <option value="PyPI">PyPI</option>
@@ -105,7 +105,7 @@ const VulnerabilitiesForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full md:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full md:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
           >
             {isLoading ? "Checking..." : "Check Vulnerabilities"}
           </button>
