@@ -15,7 +15,7 @@ export const getSeverityColorFromString = (severity?: string) => {
   const severityLower = severity.toLowerCase();
   if (severityLower === "critical") return "bg-red-600";
   if (severityLower === "high") return "bg-orange-600";
-  if (severityLower === "medium") return "bg-yellow-500";
+  if (severityLower === "moderate") return "bg-yellow-500";
   if (severityLower === "low") return "bg-blue-500";
 
   return "bg-gray-500";

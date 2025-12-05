@@ -1,5 +1,5 @@
 import { HiExclamationCircle } from "react-icons/hi2";
-import { getVulnerabilities } from "@/actions";
+import { getVulnerabilities } from "@/server";
 import type { OSVVulnerability, VulnerabilitiesListProps } from "@/types";
 import { NoVulnFound } from "./NoVulnFound";
 import { VulnerabilityCard } from "./VulnerabilityCard";
@@ -60,15 +60,7 @@ export const VulnerabilitiesList = async ({
           </div>
           <div className="space-y-4">
             {finalVulnerabilities.map((vuln, idx) => (
-              <VulnerabilityCard
-                key={vuln.id || idx}
-                vulnerability={vuln}
-                searchParams={{
-                  ecosystem,
-                  package: packageName,
-                  version: packageVersion,
-                }}
-              />
+              <VulnerabilityCard key={vuln.id || idx} vulnerability={vuln} />
             ))}
           </div>
           <br />

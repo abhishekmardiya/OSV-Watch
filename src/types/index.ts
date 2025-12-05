@@ -63,11 +63,6 @@ export interface OSVQueryPayload {
 
 export interface VulnerabilityCardProps {
   vulnerability: OSVVulnerability;
-  searchParams?: {
-    ecosystem?: string;
-    package?: string;
-    version?: string;
-  };
 }
 
 export interface VulnerabilitiesListProps {
@@ -90,21 +85,11 @@ export interface VulnerabilityDetailContentProps {
   params: Promise<{
     id: string;
   }>;
-  searchParams: Promise<{
-    ecosystem: string;
-    packageName: string;
-    packageVersion: string;
-  }>;
 }
 
 export interface VulnerabilityPageProps {
   params: Promise<{
     id: string;
-  }>;
-  searchParams: Promise<{
-    ecosystem?: string;
-    package?: string;
-    version?: string;
   }>;
 }
 
