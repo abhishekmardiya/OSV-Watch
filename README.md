@@ -16,9 +16,7 @@ OSV Watch provides a comprehensive interface for discovering, tracking, and moni
 
 - 🔍 **Search Vulnerabilities** - Search for vulnerabilities by package name, CVE ID, or description
 - 📊 **Vulnerability Details** - View comprehensive information about each vulnerability
-- 🔔 **Real-time Updates** - Get notified about new vulnerabilities affecting your projects
 - 📦 **Package Monitoring** - Track vulnerabilities for specific packages or dependencies
-- 🎯 **Filter & Sort** - Advanced filtering and sorting capabilities
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
 
 ## Prerequisites
@@ -69,12 +67,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/) 16
-- **React**: 19.2
+- **Framework**: [Next.js](https://nextjs.org/) 16, utilizing the latest cache component for improved performance
+- **React**: 19.2+
 - **React Compiler**: 1.0
 - **Language**: TypeScript 5+
 - **Styling**: Tailwind CSS 4
-- **Linting & Formatting**: Biome
+- **Linting & Formatting**: Biome 2+
 - **Package Manager**: npm
 
 
