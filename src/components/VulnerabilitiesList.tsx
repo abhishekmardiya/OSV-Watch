@@ -67,11 +67,11 @@ export const VulnerabilitiesList = async ({
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               Vulnerabilities Found
             </h2>
-            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
+            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-semibold">
               {finalVulnerabilities?.length}{" "}
-              {finalVulnerabilities.length === 1
+              {finalVulnerabilities?.length === 1
                 ? "vulnerability"
-                : "finalVulnerabilities"}
+                : "vulnerabilities"}
             </span>
           </div>
           <div className="space-y-4">

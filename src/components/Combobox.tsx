@@ -36,29 +36,6 @@ const Combobox = ({
 
   const selectedOption = options.find((opt) => opt.value === value);
 
-  useEffect(() => {
-    if (selectedOption) {
-      setInputValue(selectedOption.label);
-    }
-  }, [selectedOption]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-        if (selectedOption) {
-          setInputValue(selectedOption.label);
-        }
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [selectedOption]);
-
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(inputValue.toLowerCase())
   );
@@ -123,6 +100,29 @@ const Combobox = ({
       return;
     }
   };
+
+  useEffect(() => {
+    if (selectedOption) {
+      setInputValue(selectedOption.label);
+    }
+  }, [selectedOption]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        if (selectedOption) {
+          setInputValue(selectedOption.label);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [selectedOption]);
 
   useEffect(() => {
     if (highlightedIndex >= 0 && listRef.current) {

@@ -11,6 +11,8 @@ import {
 import { FormShimmer } from "@/components/FormShimmer";
 import VulnerabilitiesForm from "@/components/VulnerabilitiesForm";
 import { VulnerabilitiesList } from "@/components/VulnerabilitiesList";
+import { VulnerabilitiesListShimmer } from "@/components/VulnerabilitiesListShimmer";
+import { ECOSYSTEM_COLORS, PACKAGE_MANAGERS } from "@/constants";
 import type { HomeProps } from "@/types";
 
 export default async function Home({ searchParams }: HomeProps) {
@@ -72,7 +74,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <br />
 
         {/* Vulnerabilities Results */}
-        <Suspense>
+        <Suspense fallback={<VulnerabilitiesListShimmer />}>
           <VulnerabilitiesList formInputs={formInputs} />
         </Suspense>
 
@@ -110,7 +112,8 @@ export default async function Home({ searchParams }: HomeProps) {
                 Multi-Ecosystem Support
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                Supports npm, PyPI, Maven, Go, NuGet, RubyGems, Cargo, and more
+                Supports {PACKAGE_MANAGERS.length}+ ecosystems including npm,
+                PyPI, Maven, Go, NuGet, RubyGems, Cargo, Packagist, and more
               </p>
             </div>
           </div>
@@ -140,29 +143,23 @@ export default async function Home({ searchParams }: HomeProps) {
           <h2 className="text-2xl font-bold bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6">
             Supported Ecosystems
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "npm", color: "from-red-500 to-orange-500" },
-              { name: "PyPI", color: "from-blue-500 to-cyan-500" },
-              { name: "Maven", color: "from-yellow-500 to-orange-500" },
-              { name: "Go", color: "from-cyan-500 to-blue-500" },
-              { name: "NuGet", color: "from-purple-500 to-pink-500" },
-              { name: "RubyGems", color: "from-red-500 to-pink-500" },
-              { name: "Cargo", color: "from-orange-500 to-red-500" },
-              { name: "Packagist", color: "from-indigo-500 to-purple-500" },
-            ].map((ecosystem) => (
-              <div
-                key={ecosystem.name}
-                className="group flex items-center gap-2 p-3 bg-linear-to-br from-gray-50 to-gray-100/50 dark:from-gray-700 dark:to-gray-800/50 rounded-xl border border-gray-200/50 dark:border-gray-600/50 hover:shadow-md hover:scale-105 transition-all duration-300"
-              >
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {PACKAGE_MANAGERS.map((ecosystem, index) => {
+              const color = ECOSYSTEM_COLORS[index % ECOSYSTEM_COLORS.length];
+              return (
                 <div
-                  className={`w-2 h-2 rounded-full bg-linear-to-r ${ecosystem.color} group-hover:scale-150 transition-transform duration-300`}
-                />
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {ecosystem.name}
-                </span>
-              </div>
-            ))}
+                  key={ecosystem.value}
+                  className="group flex items-center gap-2 p-3 bg-linear-to-br from-gray-50 to-gray-100/50 dark:from-gray-700 dark:to-gray-800/50 rounded-xl border border-gray-200/50 dark:border-gray-600/50 hover:shadow-md hover:scale-105 transition-all duration-300"
+                >
+                  <div
+                    className={`w-2 h-2 rounded-full bg-linear-to-r ${color} group-hover:scale-150 transition-transform duration-300`}
+                  />
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {ecosystem.label}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

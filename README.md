@@ -19,6 +19,15 @@ OSV Watch provides a comprehensive interface for discovering, tracking, and moni
 - 📦 **Package Monitoring** - Track vulnerabilities for specific packages or dependencies
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
 
+## Supported Ecosystems
+
+OSV Watch supports **38+ ecosystems** for vulnerability scanning, including:
+
+- **Package Managers**: npm, PyPI, Maven, Go, NuGet, RubyGems, Cargo, Packagist, Pub, Hex, Hackage, CRAN, Julia, GHC
+- **Linux Distributions**: Debian, Ubuntu, Alpine, Red Hat, SUSE, openSUSE, Rocky Linux, AlmaLinux, Mageia, openEuler, MinimOS, Wolfi
+- **Container Images**: Chainguard, Bitnami, BellSoft Hardened Containers, Alpaquita
+- **Other**: Android, Linux, GIT, GitHub Actions, OSS-Fuzz, SwiftURL, VSCode, Echo
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your machine:

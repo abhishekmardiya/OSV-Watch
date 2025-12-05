@@ -19,6 +19,37 @@ const VulnerabilitiesForm = () => {
   const [packageVersion, setPackageVersion] = useState(initialPackageVersion);
   const [ecosystem, setEcosystem] = useState(initialEcosystem);
 
+  const hasSearchParams = Boolean(
+    searchParams.get("ecosystem") ||
+      searchParams.get("package") ||
+      searchParams.get("version")
+  );
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    startTransition(() => {
+      const params = new URLSearchParams();
+      if (ecosystem) params.set("ecosystem", ecosystem);
+      if (packageName) params.set("package", packageName);
+      if (packageVersion) params.set("version", packageVersion);
+
+      router.push(`/?${params.toString()}`, {
+        scroll: false,
+      });
+    });
+  };
+
+  const handleReset = () => {
+    startTransition(() => {
+      setEcosystem("npm");
+      setPackageName("");
+      setPackageVersion("");
+
+      router.push("/");
+    });
+  };
+
   useEffect(() => {
     const ecosystemParam = searchParams.get("ecosystem");
     const packageParam = searchParams.get("package");
@@ -28,37 +59,6 @@ const VulnerabilitiesForm = () => {
     if (packageParam) setPackageName(packageParam);
     if (versionParam) setPackageVersion(versionParam);
   }, [searchParams]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const params = new URLSearchParams();
-    if (ecosystem) params.set("ecosystem", ecosystem);
-    if (packageName) params.set("package", packageName);
-    if (packageVersion) params.set("version", packageVersion);
-
-    startTransition(() => {
-      router.push(`/?${params.toString()}`, {
-        scroll: false,
-      });
-    });
-  };
-
-  const handleReset = () => {
-    setEcosystem("npm");
-    setPackageName("");
-    setPackageVersion("");
-
-    startTransition(() => {
-      router.push("/");
-    });
-  };
-
-  const hasSearchParams = Boolean(
-    searchParams.get("ecosystem") ||
-      searchParams.get("package") ||
-      searchParams.get("version")
-  );
 
   return (
     <section>
