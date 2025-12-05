@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { FaGithub } from "react-icons/fa";
 import {
   HiArrowTopRightOnSquare,
   HiBolt,
@@ -7,6 +8,7 @@ import {
   HiCube,
   HiShieldCheck,
 } from "react-icons/hi2";
+import { FormShimmer } from "@/components/FormShimmer";
 import VulnerabilitiesForm from "@/components/VulnerabilitiesForm";
 import { VulnerabilitiesList } from "@/components/VulnerabilitiesList";
 import type { HomeProps } from "@/types";
@@ -35,17 +37,35 @@ export default async function Home({ searchParams }: HomeProps) {
             Check for security vulnerabilities in your packages using the OSV
             (Open Source Vulnerabilities) database
           </p>
-          <div className="inline-flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50 dark:border-gray-700/50">
-            <HiShieldCheck
-              className="w-5 h-5 text-blue-600 dark:text-blue-400"
-              aria-label="Security shield icon"
-            />
-            <span className="font-medium">Powered by OSV.dev API</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+            <div className="inline-flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50 dark:border-gray-700/50">
+              <HiShieldCheck
+                className="w-5 h-5 text-blue-600 dark:text-blue-400"
+                aria-label="Security shield icon"
+              />
+              <span className="font-medium">Powered by OSV.dev API</span>
+            </div>
+            <Link
+              href="https://github.com/abhishekmardiya/OSV-Watch"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md transition-all duration-300 hover:scale-105"
+            >
+              <FaGithub
+                className="w-5 h-5 text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300"
+                aria-label="GitHub icon"
+              />
+              <span className="font-medium">View on GitHub</span>
+              <HiArrowTopRightOnSquare
+                className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                aria-label="External link icon"
+              />
+            </Link>
           </div>
         </div>
 
         {/* Vulnerability Scanner Form */}
-        <Suspense>
+        <Suspense fallback={<FormShimmer />}>
           <VulnerabilitiesForm />
         </Suspense>
         <br />
