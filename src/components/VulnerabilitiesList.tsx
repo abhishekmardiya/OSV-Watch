@@ -1,6 +1,7 @@
-import { HiCheckCircle, HiExclamationCircle } from "react-icons/hi2";
+import { HiExclamationCircle } from "react-icons/hi2";
 import { getVulnerabilities } from "@/actions";
 import type { OSVVulnerability, VulnerabilitiesListProps } from "@/types";
+import { NoVulnFound } from "./NoVulnFound";
 import { VulnerabilityCard } from "./VulnerabilityCard";
 
 export const VulnerabilitiesList = async ({
@@ -39,24 +40,7 @@ export const VulnerabilitiesList = async ({
   }
 
   if (isSearchActive && !finalVulnerabilities?.length) {
-    return (
-      <div>
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center">
-          <HiCheckCircle
-            className="w-12 h-12 text-green-600 dark:text-green-400 mx-auto mb-4"
-            aria-label="No vulnerabilities found"
-          />
-          <p className="text-green-800 dark:text-green-200 font-medium">
-            No vulnerabilities found!
-          </p>
-          <p className="text-green-700 dark:text-green-300 text-sm mt-2">
-            Your package version appears to be secure.
-          </p>
-        </div>
-        <br />
-        <br />
-      </div>
-    );
+    return <NoVulnFound />;
   }
 
   return (
@@ -76,7 +60,15 @@ export const VulnerabilitiesList = async ({
           </div>
           <div className="space-y-4">
             {finalVulnerabilities.map((vuln, idx) => (
-              <VulnerabilityCard key={vuln.id || idx} vulnerability={vuln} />
+              <VulnerabilityCard
+                key={vuln.id || idx}
+                vulnerability={vuln}
+                searchParams={{
+                  ecosystem,
+                  package: packageName,
+                  version: packageVersion,
+                }}
+              />
             ))}
           </div>
           <br />

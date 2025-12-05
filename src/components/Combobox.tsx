@@ -2,21 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HiChevronDown } from "react-icons/hi2";
-
-interface ComboboxOption {
-  value: string;
-  label: string;
-}
-
-interface ComboboxProps {
-  id: string;
-  label: string;
-  value: string;
-  options: readonly ComboboxOption[];
-  onChange: (value: string) => void;
-  placeholder?: string;
-  required?: boolean;
-}
+import type { ComboboxOption, ComboboxProps } from "@/types";
 
 const Combobox = ({
   id,

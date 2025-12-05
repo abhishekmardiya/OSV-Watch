@@ -63,6 +63,11 @@ export interface OSVQueryPayload {
 
 export interface VulnerabilityCardProps {
   vulnerability: OSVVulnerability;
+  searchParams?: {
+    ecosystem?: string;
+    package?: string;
+    version?: string;
+  };
 }
 
 export interface VulnerabilitiesListProps {
@@ -79,4 +84,41 @@ export interface HomeProps {
     package?: string;
     version?: string;
   }>;
+}
+
+export interface VulnerabilityDetailContentProps {
+  params: Promise<{
+    id: string;
+  }>;
+  searchParams: Promise<{
+    ecosystem: string;
+    packageName: string;
+    packageVersion: string;
+  }>;
+}
+
+export interface VulnerabilityPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+  searchParams: Promise<{
+    ecosystem?: string;
+    package?: string;
+    version?: string;
+  }>;
+}
+
+export interface ComboboxOption {
+  value: string;
+  label: string;
+}
+
+export interface ComboboxProps {
+  id: string;
+  label: string;
+  value: string;
+  options: readonly ComboboxOption[];
+  onChange: (value: string) => void;
+  placeholder?: string;
+  required?: boolean;
 }
