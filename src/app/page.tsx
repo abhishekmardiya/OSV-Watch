@@ -15,6 +15,7 @@ import { FormShimmer } from "@/components/FormShimmer";
 import VulnerabilitiesForm from "@/components/VulnerabilitiesForm";
 import { VulnerabilitiesList } from "@/components/VulnerabilitiesList";
 import { VulnerabilitiesListShimmer } from "@/components/VulnerabilitiesListShimmer";
+import { VulnerabilitiesScroll } from "@/components/VulnerabilitiesScroll";
 import { ECOSYSTEM_COLORS, PACKAGE_MANAGERS } from "@/constants";
 import type { HomeProps } from "@/types";
 
@@ -76,7 +77,11 @@ export default async function Home({ searchParams }: HomeProps) {
         <br />
         <br />
 
-        {/* Vulnerabilities Results */}
+        {/* Vulnerabilities scroll */}
+        <Suspense>
+          <VulnerabilitiesScroll />
+        </Suspense>
+
         <Suspense fallback={<VulnerabilitiesListShimmer />}>
           <VulnerabilitiesList formInputs={formInputs} />
         </Suspense>

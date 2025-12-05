@@ -27,7 +27,10 @@ export const VulnerabilitiesList = async ({
 
   if (isSearchActive && !finalCode) {
     return (
-      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
+      <div
+        id="vulnerabilities-results-content"
+        className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center"
+      >
         <HiExclamationCircle
           className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4"
           aria-label="Error"
@@ -40,13 +43,17 @@ export const VulnerabilitiesList = async ({
   }
 
   if (isSearchActive && !finalVulnerabilities?.length) {
-    return <NoVulnFound />;
+    return (
+      <div id="vulnerabilities-results-content">
+        <NoVulnFound />
+      </div>
+    );
   }
 
   return (
     <>
       {isSearchActive && (
-        <div className="space-y-4">
+        <div id="vulnerabilities-results-content" className="space-y-4">
           <div className="flex items-center flex-col sm:flex-row gap-4 xs:gap-0 justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               Vulnerabilities Found

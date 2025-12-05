@@ -7,7 +7,7 @@ import { PACKAGE_MANAGERS } from "@/constants";
 import Combobox from "./Combobox";
 
 const VulnerabilitiesForm = () => {
-  const router = useRouter();
+  const { push } = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
@@ -34,7 +34,7 @@ const VulnerabilitiesForm = () => {
       if (packageName) params.set("package", packageName);
       if (packageVersion) params.set("version", packageVersion);
 
-      router.push(`/?${params.toString()}`, {
+      push(`/?${params.toString()}`, {
         scroll: false,
       });
     });
@@ -46,7 +46,9 @@ const VulnerabilitiesForm = () => {
       setPackageName("");
       setPackageVersion("");
 
-      router.push("/");
+      push("/", {
+        scroll: false,
+      });
     });
   };
 
