@@ -23,5 +23,5 @@
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": ["vulns"]
+  "cSpell.words": ["opengraph", "vulns"]
 }
