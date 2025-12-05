@@ -3,6 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { HiXMark } from "react-icons/hi2";
+import { PACKAGE_MANAGERS } from "@/constants";
+import Combobox from "./Combobox";
 
 const VulnerabilitiesForm = () => {
   const router = useRouter();
@@ -60,31 +62,19 @@ const VulnerabilitiesForm = () => {
 
   return (
     <section>
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-8 mb-8">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-8 mb-8 overflow-visible">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-visible">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label
-                htmlFor="ecosystem"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                Ecosystem
-              </label>
-              <select
+            <div className="relative z-10">
+              <Combobox
                 id="ecosystem"
+                label="Ecosystem"
                 value={ecosystem}
-                onChange={(e) => setEcosystem(e.target.value)}
-                className="w-full px-4 py-2.5 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 cursor-pointer bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-500"
-              >
-                <option value="npm">npm</option>
-                <option value="PyPI">PyPI</option>
-                <option value="Maven">Maven</option>
-                <option value="Go">Go</option>
-                <option value="NuGet">NuGet</option>
-                <option value="RubyGems">RubyGems</option>
-                <option value="Cargo">Cargo</option>
-                <option value="Packagist">Packagist</option>
-              </select>
+                options={PACKAGE_MANAGERS}
+                onChange={(value) => setEcosystem(value)}
+                placeholder="Search ecosystem..."
+                required
+              />
             </div>
             <div>
               <label

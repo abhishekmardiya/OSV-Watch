@@ -38,7 +38,7 @@ export const VulnerabilitiesList = async ({
     );
   }
 
-  if (isSearchActive && !finalVulnerabilities.length) {
+  if (isSearchActive && !finalVulnerabilities?.length) {
     return (
       <div>
         <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center">
@@ -68,7 +68,7 @@ export const VulnerabilitiesList = async ({
               Vulnerabilities Found
             </h2>
             <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
-              {finalVulnerabilities.length}{" "}
+              {finalVulnerabilities?.length}{" "}
               {finalVulnerabilities.length === 1
                 ? "vulnerability"
                 : "finalVulnerabilities"}
