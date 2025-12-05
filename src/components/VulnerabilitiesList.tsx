@@ -63,7 +63,7 @@ export const VulnerabilitiesList = async ({
     <>
       {isSearchActive && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center flex-col sm:flex-row gap-4 xs:gap-0 justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               Vulnerabilities Found
             </h2>

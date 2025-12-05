@@ -36,7 +36,9 @@ const VulnerabilitiesForm = () => {
     if (packageVersion) params.set("version", packageVersion);
 
     startTransition(() => {
-      router.push(`/?${params.toString()}`);
+      router.push(`/?${params.toString()}`, {
+        scroll: false,
+      });
     });
   };
 
