@@ -56,6 +56,7 @@ export default async function Home({ searchParams }: HomeProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 text-sm text-gray-700 dark:text-gray-300 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md transition-all duration-300 hover:scale-105"
+              prefetch={false}
             >
               <FaGithub
                 className="w-5 h-5 text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300"
@@ -97,9 +98,9 @@ export default async function Home({ searchParams }: HomeProps) {
                   aria-label="Checkmark icon"
                 />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Real-time Scanning
-              </h3>
+              </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Instantly check your package versions against the latest
                 vulnerability database
@@ -116,9 +117,9 @@ export default async function Home({ searchParams }: HomeProps) {
                   aria-label="Package icon"
                 />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Multi-Ecosystem Support
-              </h3>
+              </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Supports {PACKAGE_MANAGERS.length}+ ecosystems including npm,
                 PyPI, Maven, Go, NuGet, RubyGems, Cargo, Packagist, and more
@@ -135,9 +136,9 @@ export default async function Home({ searchParams }: HomeProps) {
                   aria-label="Lightning bolt icon"
                 />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Detailed Reports
-              </h3>
+              </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Get comprehensive vulnerability details including CVEs, affected
                 versions, and references
@@ -402,6 +403,7 @@ export default async function Home({ searchParams }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                prefetch={false}
               >
                 <HiArrowTopRightOnSquare
                   className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
@@ -414,6 +416,7 @@ export default async function Home({ searchParams }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                prefetch={false}
               >
                 <HiArrowTopRightOnSquare
                   className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"

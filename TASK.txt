@@ -1,3 +1,1 @@
-- Reuse Link component
 - Add sort and filters
-- Add husky

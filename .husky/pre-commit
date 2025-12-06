@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+echo "🔍 Running TypeScript checks..."
+npx tsc --noEmit
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript errors detected. Commit aborted."
+  exit 1
+fi
+echo "✅ TypeScript checks passed!"
+
+echo "🧹 Running Biome lint checks..."
+npx biome check --diagnostic-level=error --max-diagnostics=10000
+if [ $? -ne 0 ]; then
+  echo "❌ Biome linting errors detected. Commit aborted."
+  exit 1
+fi
+echo "✅ Biome lint checks passed!"
