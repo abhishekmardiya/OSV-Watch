@@ -107,3 +107,15 @@ export interface ComboboxProps {
   placeholder?: string;
   required?: boolean;
 }
+
+export interface CVSSMetrics {
+  version?: string;
+  AV?: string;
+  AC?: string;
+  PR?: string;
+  UI?: string;
+  S?: string;
+  C?: string;
+  I?: string;
+  A?: string;
+}
