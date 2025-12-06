@@ -1,7 +1,7 @@
 export const VulnerabilitiesListShimmer = () => {
   return (
     <div className="space-y-4 mb-8">
-      <div className="flex items-center flex-col sm:flex-row gap-4 xs:gap-0 justify-between mb-6 animate-pulse">
+      <div className="flex items-center flex-col sm:flex-row gap-4 justify-between mb-6 animate-pulse">
         <div className="h-8 w-48 bg-gray-300 dark:bg-gray-600 rounded" />
         <div className="h-7 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" />
       </div>
