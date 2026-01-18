@@ -76,7 +76,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/) 16, utilizing the latest cache component for improved performance
+- **Framework**: [Next.js](https://nextjs.org/) 16, utilizing the latest `cache components` for improved performance
 - **React**: 19.2+
 - **React Compiler**: 1.0
 - **Language**: TypeScript 5+
